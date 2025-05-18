@@ -1,8 +1,8 @@
-# 📄 Gdańsk City Hall – Request & Complaint Analytics System
+# Gdańsk City Hall – Request & Complaint Analytics System
 
 A data-driven analytical system designed to support Gdańsk City Hall in monitoring and improving their core public service processes — **document request handling** and **public complaint management**.
 
-## 🏛️ Project Purpose
+## Project Purpose
 
 The City Hall aims to ensure **faster and more efficient service for citizens**, with a strategic goal to reduce the **average request wait time by 3% annually**. Our project supports this goal by providing insights into:
 
@@ -11,18 +11,18 @@ The City Hall aims to ensure **faster and more efficient service for citizens**,
 - Peak activity periods
 - Request processing efficiency
 
-## 📊 Business Processes Analyzed
+## Business Processes Analyzed
 
 ### 1. Requesting a Document
 
 Citizens can request documents such as ID cards or vehicle registrations either:
 
-- ✅ Online (via the City Hall website)
-- 🏢 In-person (at the facility)
+- Online (via the City Hall website)
+- In-person (at the facility)
 
 These requests are processed through several stages: **submission → scheduling → processing → completion**.
 
-#### 🔍 Key Analytical Questions
+#### Key Analytical Questions
 
 - What is the average wait time this month vs. last month?
 - Which document types have the longest/shortest wait times?
@@ -36,7 +36,7 @@ Citizens submit complaints regarding public services (e.g. noise, road issues). 
 
 - Logged ➡️ Categorized ➡️ Assigned ➡️ Reviewed ➡️ Resolved
 
-#### 🔍 Key Analytical Questions
+#### Key Analytical Questions
 
 - What is the average complaint resolution time this month?
 - Which categories are most frequent or take the longest to resolve?
@@ -46,9 +46,9 @@ Citizens submit complaints regarding public services (e.g. noise, road issues). 
 
 ---
 
-## 📁 Data Sources
+## Data Sources
 
-### 🧮 Database Tables
+### Database Tables
 
 #### `OFFICIAL`
 | Attribute         | Type      | Description                                    |
@@ -83,7 +83,7 @@ Citizens submit complaints regarding public services (e.g. noise, road issues). 
 
 ---
 
-### 📄 CSV Files
+### CSV Files
 
 #### Document Request Reasons
 | Column | Description                                            |
@@ -105,7 +105,7 @@ Citizens submit complaints regarding public services (e.g. noise, road issues). 
 
 ---
 
-## 🔗 Relationships Between Data
+## Relationships Between Data
 
 - **CITIZEN ↔ REQUEST** (One-to-Many): One citizen may have multiple document requests.
 - **OFFICIAL ↔ REQUEST** (One-to-Many): Each request is processed by one official.
@@ -113,44 +113,44 @@ Citizens submit complaints regarding public services (e.g. noise, road issues). 
 
 ---
 
-## ❓ Example Analytical Scenarios
+## Example Analytical Scenarios
 
-### 📈 Demand Tracking
+### Demand Tracking
 - Total document requests this vs. last month
 - Online vs. in-person requests per month
 - Peaks in submission days or times
 - Most requested document types
 
-### ⏱️ Efficiency Analysis
+### Efficiency Analysis
 - Average processing time by document type or official
 - Wait time difference: online vs. in-person
 - Requests exceeding estimated wait time
 - Delay reasons by document type
 
-### 🧑‍💼 Staff Performance
+### Staff Performance
 - Workload per official
 - Completion time comparisons between officials
 - Efficiency during peak vs. off-peak periods
 
 ---
 
-## 💡 Additional Insights (Future Enhancements)
+## Additional Insights (Future Enhancements)
 
 - Compare foreign vs. native citizen service times (requires ethnicity data)
 - Collect post-service feedback from citizens (requires feedback system)
 
 ---
 
-## 📐 KPIs & Business Goals
+## KPIs & Business Goals
 
-- 📉 Reduce average wait time by **0.25% monthly**
-- 🕒 Reduce request processing time by **0.25% monthly**
-- ✅ Maintain/increase number of processed requests
-- 🎯 Achieve high percentage of requests resolved within estimated time
+- Reduce average wait time by **0.25% monthly**
+- Reduce request processing time by **0.25% monthly**
+- Maintain/increase number of processed requests
+- Achieve high percentage of requests resolved within estimated time
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - SQL-based relational database
 - CSV data integration
@@ -159,7 +159,7 @@ Citizens submit complaints regarding public services (e.g. noise, road issues). 
 
 ---
 
-## 📍 Summary
+## Summary
 
 This project provides Gdańsk City Hall with the analytical backbone necessary to monitor service quality, allocate staff efficiently, and make data-informed policy decisions — all to ensure faster, smarter public service.
 
