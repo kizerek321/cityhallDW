@@ -1,0 +1,123 @@
+1)
+
+SELECT 
+  {[Measures].[Fact Document Request Count]} ON COLUMNS,
+  {[Completion Date].[Month Num].[2], [Completion Date].[Month Num].[9]} ON ROWS
+FROM [DW]
+
+2)
+SELECT 
+  {[Measures].[Fact Document Request Count]} ON COLUMNS,
+  NON EMPTY 
+    CROSSJOIN(
+      {[Completion Date].[Month Num].&[2], [Completion Date].[Month Num].&[9]},
+      {
+        [Junk].[Submission Method Name].&[In person],
+        [Junk].[Submission Method Name].&[Online]
+      }
+    ) ON ROWS
+FROM [DW]
+
+3)
+SELECT 
+  {[Measures].[Fact Document Request Count]} ON COLUMNS,
+  NON EMPTY 
+    CROSSJOIN(
+      {[Completion Date].[Month Num].&[2], [Completion Date].[Month Num].&[9]},
+      {
+        [Junk].[Document Name].&[ID card],
+        [Junk].[Document Name].&[Passport],
+        [Junk].[Document Name].&[Birth certificate],
+        [Junk].[Document Name].&[Marriage Certificate],
+        [Junk].[Document Name].&[Driving license]
+      }
+
+    ) ON ROWS
+FROM [DW]
+
+4)
+
+
+5)
+SELECT 
+  {[Measures].[Fact Document Request Count]} ON COLUMNS,
+  NON EMPTY 
+    FILTER(
+      [Dim Official].[Official Id].MEMBERS,
+      ([Dim Official].[Is Working].CURRENTMEMBER IS [Dim Official].[Is Working].&[1]) 
+    ) ON ROWS
+FROM [DW]
+
+6)
+ SELECT 
+  {[Measures].[avg_waiting_time]} ON COLUMNS,
+  [Junk].[Document Name].MEMBERS ON ROWS
+FROM [DW]
+
+7)
+WITH MEMBER [Measures].[Avg Processing Time] AS
+  IIF(
+    [Measures].[Fact Document Request Count] > 0,
+    [Measures].[Processing Time] / [Measures].[Fact Document Request Count],
+    NULL
+  )
+
+SELECT 
+  {[Measures].[Avg Processing Time]} ON COLUMNS,
+  NON EMPTY [Dim Official].[Official Id].MEMBERS ON ROWS
+FROM [DW]
+
+8)
+
+WITH MEMBER [Measures].[Avg Processing Time] AS
+  IIF(
+    [Measures].[Fact Document Request Count] > 0,
+    [Measures].[Processing Time] / [Measures].[Fact Document Request Count],
+    NULL
+  )
+
+SELECT 
+  {[Measures].[Avg Processing Time]} ON COLUMNS,
+  [Junk].[Submission Method Name].MEMBERS ON ROWS
+FROM [DW]
+
+9) do naprawy
+
+SELECT 
+  {[Measures].[num_delayed]} ON COLUMNS,
+  NON EMPTY
+    CROSSJOIN(
+      {[Dim Delay Reason].[Has All Data].&[0], [Dim Delay Reason].[Has All Data].&[1]},
+      {[Dim Delay Reason].[Is Queue Significant].&[0], [Dim Delay Reason].[Is Queue Significant].&[1]}
+    ) ON ROWS
+FROM [DW]
+WHERE ([Junk].[Document Name].&[Passport])
+
+
+10)
+
+WITH 
+MEMBER [Measures].[Average delay_duration] AS
+  IIF(
+    ([Measures].[Delay Duration for Delayed]) > 0,
+    [Measures].[Delay Duration for Delayed] / [Measures].[Number of Delayed Requests],
+    NULL
+  )
+
+MEMBER [Measures].[Number of Delayed Requests] AS
+  SUM(
+        [Dim Delay Reason].[Delay Reason Key].MEMBERS,
+    IIF([Measures].[Delay Duration] > 0, 1, 0)
+  )
+
+MEMBER [Measures].[Delay Duration for Delayed] AS
+  SUM(
+    [Dim Delay Reason].[Delay Reason Key].MEMBERS,
+    IIF([Measures].[Delay Duration] > 0, [Measures].[Delay Duration], 0)
+  )
+
+SELECT 
+  {[Measures].[Average delay_duration]} ON COLUMNS,
+  [Junk].[Document Name].MEMBERS ON ROWS
+FROM [DW]
+
